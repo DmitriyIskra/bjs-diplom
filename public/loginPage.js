@@ -11,16 +11,16 @@ userForm.loginFormCallback = data => ApiConnector.login(data, (response) => {
     }
     else {
         userForm.setLoginErrorMessage(response.error);
-    }
+    };
 });
     
 userForm.registerFormCallback = data => ApiConnector.register(data, (response) => {
     if(response.success) {
-        location.reload()
+        location.reload();
     }
     else {
-        userForm.setRegisterErrorMessage(response.error)
-    }
+        userForm.setRegisterErrorMessage(response.error);
+    };
 })    
 
 //{success: true, userId: 6}
