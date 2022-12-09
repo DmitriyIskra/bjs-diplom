@@ -52,13 +52,14 @@ setInterval( () => getExchangeRates(), 60000 );
 const moneyManager = new MoneyManager();
 
 moneyManager.addMoneyCallback = (data) => ApiConnector.addMoney(data, (response) => {
+    console.log(response)
     if(response.success) {
         ProfileWidget.showProfile(response.data);
         
-        moneyManager.setMessage(response.success, `Баланс успешно пополнен`);
+        moneyManager.setMessage(response.success, 'Баланс успешно пополнен');
     }
     else {
-        moneyManager.setMessage(response.success, `Пополнить баланс не удалось`);
+        moneyManager.setMessage(response.success, response.error);
     };
 });
 
@@ -71,7 +72,7 @@ moneyManager.conversionMoneyCallback = (data) => ApiConnector.convertMoney(data,
         moneyManager.setMessage(response.success, `Конвертация прошла успешно`);
     }
     else {
-        moneyManager.setMessage(response.success, `Ошибка, конвертация не была осуществлена`);
+        moneyManager.setMessage(response.success, response.error);
     }
 });
 
@@ -85,7 +86,7 @@ moneyManager.sendMoneyCallback = (data) => {
             moneyManager.setMessage(response.success, `Перевод денег прошел успешно`);
         }
         else {
-            moneyManager.setMessage(response.success, `Ошибка. Перевод денег не был осуществлен`);
+            moneyManager.setMessage(response.success, response.error);
         };
     });
 };
@@ -121,7 +122,7 @@ favoritesWidget.addUserCallback = (data) => ApiConnector.addUserToFavorites(data
 
     }
     else {
-        favoritesWidget.setMessage(response.success, `Ошибка пользователь не был добавлен`);
+        favoritesWidget.setMessage(response.success, response.error);
     };
 });
 
@@ -137,7 +138,7 @@ favoritesWidget.removeUserCallback = (data) => {
             favoritesWidget.setMessage(response.success, `Пользователь успешно удален`);
         }
         else {
-            favoritesWidget.setMessage(response.success, `Ошибка пользователь не был удален`);
+            favoritesWidget.setMessage(response.success, response.error);
         };
     });
 };
